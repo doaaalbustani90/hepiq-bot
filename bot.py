@@ -549,7 +549,7 @@ def build_app(token: str) -> Application:
 if __name__ == "__main__":
     # ضع التوكن هنا
     import os
-        BOT_TOKEN = os.getenv("BOT_TOKEN")
+    BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 
     app = build_app(BOT_TOKEN)
