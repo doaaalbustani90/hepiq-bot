@@ -548,7 +548,10 @@ def build_app(token: str) -> Application:
 
 if __name__ == "__main__":
     import os
+
     BOT_TOKEN = os.getenv("BOT_TOKEN")
+    if not BOT_TOKEN:
+        raise RuntimeError("BOT_TOKEN is missing. Set it in Render Environment Variables.")
 
     app = build_app(BOT_TOKEN)
     app.run_polling(drop_pending_updates=True)
