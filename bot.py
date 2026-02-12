@@ -152,7 +152,7 @@ def admin_ticket_actions_kb(ticket_id: int) -> InlineKeyboardMarkup:
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "مرحباً. هذا بوت دعم مشاكل تسجيل الدخول في تطبيق HEPIQ.\n"
+        "مرحباً. هذا بوت دعم لحل مشاكل تسجيل الدخول لطلبة كلية علوم الحاسوب -جامعة القادسية في تطبيق HEPIQ.\n"
         "اختر من القائمة:",
         reply_markup=main_menu_kb(),
     )
@@ -167,7 +167,7 @@ async def menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await q.answer()
 
     if q.data == "NEW_TICKET":
-        await q.message.reply_text("اكتب الاسم الثلاثي (إلزامي):")
+        await q.message.reply_text("اكتب الاسم الرباعي (إلزامي):")
         return S_FULLNAME
 
     if q.data == "FAQ":
@@ -187,7 +187,7 @@ async def menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def fullname_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
     fullname = (update.message.text or "").strip()
     if len(fullname.split()) < 3:
-        await update.message.reply_text("الرجاء إدخال الاسم الثلاثي (ثلاث كلمات على الأقل).")
+        await update.message.reply_text("الرجاء إدخال الاسم الرباعي (اربع كلمات على الأقل).")
         return S_FULLNAME
 
     context.user_data["student_fullname"] = fullname
@@ -284,7 +284,7 @@ async def photo_choice_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def photo_received_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # هذه الدالة تُستدعى عندما يرسل الطالب صورة
     if not update.message.photo:
-        await update.message.reply_text("الرجاء إرسال صورة (لقطة شاشة) أو اختر (تخطي) من القائمة.")
+        await update.message.reply_text("الرجاء إرسال صورة الوجه الامامي للبطاقة الوطنية (لقطة شاشة) أو اختر (تخطي) من القائمة.")
         await update.message.reply_text("هل تريد إرسال لقطة شاشة؟", reply_markup=photo_choice_kb())
         return S_PHOTO_OPTIONAL
 
